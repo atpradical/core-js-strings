@@ -60,7 +60,7 @@ function isString(value) {
  */
 function concatenateStrings(value1, value2) {
   // throw new Error('Not implemented');
-  return value1 + value2;
+  return value1.concat('', value2);
 }
 
 /**
@@ -76,7 +76,7 @@ function concatenateStrings(value1, value2) {
  */
 function getFirstChar(value) {
   // throw new Error('Not implemented');
-  return !value ? value : value[0];
+  return !value ? value : value.charAt(0);
 }
 
 /**
@@ -161,8 +161,15 @@ function repeatString(str, times) {
  *   removeFirstOccurrences('ABABAB', 'BA') => 'ABAB'.
  */
 function removeFirstOccurrences(str, value) {
-  return str.replace(value, '');
-  // throw new Error('Not implemented');
+  // return str.replace(value, '');
+  if (typeof str !== 'string' || typeof value !== 'string') {
+    return null;
+  }
+  const index = str.indexOf(value);
+  if (index === -1) {
+    return str;
+  }
+  return str.slice(0, index) + str.slice(index + value.length);
 }
 
 /**
@@ -221,20 +228,20 @@ function sumOfCodes(str) {
  *   startsWith('Hello World', 'Hello') => true
  */
 function startsWith(str, substr) {
-  // A function that checks if a string starts with a specific substring
-  if (typeof str !== 'string' || typeof substr !== 'string') {
-    return false;
-  }
-  if (substr.length > str.length) {
-    return false;
-  }
-  for (let i = 0; i < substr.length; i += 1) {
-    if (substr[i] !== str[i]) {
-      return false;
-    }
-  }
-  return true;
+  // if (typeof str !== 'string' || typeof substr !== 'string') {
+  //   return false;
+  // }
+  // if (substr.length > str.length) {
+  //   return false;
+  // }
+  // for (let i = 0; i < substr.length; i += 1) {
+  //   if (substr[i] !== str[i]) {
+  //     return false;
+  //   }
+  // }
+  // return true;
   // throw new Error('Not implemented');
+  return str.startsWith(substr);
 }
 
 /**
@@ -249,19 +256,8 @@ function startsWith(str, substr) {
  *   endsWith('Hello World', 'Hello') => false
  */
 function endsWith(str, substr) {
-  if (typeof str !== 'string' || typeof substr !== 'string') {
-    return false;
-  }
-  if (substr.length > str.length) {
-    return false;
-  }
-  for (let i = substr.length - 1; i >= 0; i -= 1) {
-    if (substr[i] !== str[str.length - substr.length + i]) {
-      return false;
-    }
-  }
-  return true;
   // throw new Error('Not implemented');
+  return str.endsWith(substr);
 }
 
 /**
@@ -278,16 +274,25 @@ function endsWith(str, substr) {
  *   formatTime(0, 0) => "00:00"
  */
 function formatTime(minutes, seconds) {
-  let x = minutes;
-  let y = seconds;
-  if (x.toString().length === 1) {
-    x = `0${minutes}`;
-  }
-  if (y.toString().length === 1) {
-    y = `0${seconds}`;
-  }
-  return `${x}:${y}`;
+  // let x = minutes;
+  // let y = seconds;
+  // if (x.toString().length === 1) {
+  //   x = `0${minutes}`;
+  // }
+  // if (y.toString().length === 1) {
+  //   y = `0${seconds}`;
+  // }
+  // return `${x}:${y}`;
   // throw new Error('Not implemented');
+  // Функция, которая форматирует время в виде минут и секунд
+  if (typeof minutes !== 'number' || typeof seconds !== 'number') {
+    return null;
+  }
+  let x = minutes.toString();
+  let y = seconds.toString();
+  x = x.padStart(2, '0');
+  y = y.padStart(2, '0');
+  return `${x}:${y}`;
 }
 
 /**
